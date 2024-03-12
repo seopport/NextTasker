@@ -3,8 +3,10 @@ import Image from 'next/image';
 import React from 'react';
 
 const page = async () => {
-  const response = await fetch('http://localhost:4000/companyInfo');
-  const companyInfo: companyInfo = await response.json();
+  const response = await fetch('http://localhost:3000/api/company', {
+    method: 'GET',
+  });
+  const { companyInfo: companyInfo } = await response.json();
 
   console.log(companyInfo);
 

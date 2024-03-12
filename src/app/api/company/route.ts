@@ -1,7 +1,8 @@
+import { companyInfo } from '@/types';
+import { NextApiRequest, NextApiResponse } from 'next';
+
 export async function GET(request: Request) {
-  const response = await fetch('http:localhost/4000/companyInfo', {
-    cache: 'no-cache',
-  });
+  const response = await fetch('http://localhost:4000/companyInfo');
   const companyInfo = await response.json();
 
   if (!companyInfo) {
@@ -13,5 +14,5 @@ export async function GET(request: Request) {
     );
   }
 
-  console.log(companyInfo, 'd');
+  return Response.json({ companyInfo, message: '데이터 가져오기 성공' });
 }
