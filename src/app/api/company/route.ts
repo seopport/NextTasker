@@ -1,5 +1,7 @@
 export async function GET(request: Request) {
-  const response = await fetch('http:localhost/4000/companyInfo');
+  const response = await fetch('http:localhost/4000/companyInfo', {
+    cache: 'no-cache',
+  });
   const companyInfo = await response.json();
 
   if (!companyInfo) {
@@ -11,5 +13,5 @@ export async function GET(request: Request) {
     );
   }
 
-  console.log(companyInfo);
+  console.log(companyInfo, 'd');
 }
