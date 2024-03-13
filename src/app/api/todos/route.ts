@@ -22,11 +22,16 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
+  // 들어온 데이터를 js 객체로 파싱
   const { title, contents } = await request.json();
+
+  console.log(title, contents);
 
   const response = await fetch('http://localhost:4000/todos', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
+
+    //다시 json화해서 서버 통신
     body: JSON.stringify({ title, contents, isDone: false }),
   });
 
@@ -41,5 +46,5 @@ export async function POST(request: Request) {
     );
   }
 
-  return Response.json({ todo });
+  return Response.json({ todo, message: '추가되었습니다.' });
 }

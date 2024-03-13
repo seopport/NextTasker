@@ -15,8 +15,10 @@ export async function PATCH(request: Request, { params }: { params: { id: Todo['
   return Response.json({ message: '수정이 완료되었습니다.' });
 }
 
-export async function DELETE({ params }: { params: { id: Todo['id'] } }) {
+//request 빼면 500 오류난다.. 왜?
+export async function DELETE(request: Request, { params }: { params: { id: Todo['id'] } }) {
   const { id } = params;
+  console.log(params);
 
   await fetch(`http://localhost:4000/todos/${id}`, {
     method: 'DELETE',

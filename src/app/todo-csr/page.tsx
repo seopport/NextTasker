@@ -1,13 +1,16 @@
 'use client';
 
 import { Todo } from '@/types';
+import { error } from 'console';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 
 const TodoCSRPage = () => {
   const [todos, setTodos] = useState<Todo[]>();
   const [isModifying, setIsModifying] = useState(false);
   const [targetTodo, setTargetTodo] = useState<Todo>();
+  const [modifyContent, setModifyContent] = useState<Todo['contents']>('');
   const [content, setContent] = useState<Todo['contents']>('');
+  const [title, setTitle] = useState<Todo['title']>('');
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -23,13 +26,20 @@ const TodoCSRPage = () => {
   if (!todos) return <div>로딩중 ..</div>;
 
   const handleDelete = async (id: Todo['id']) => {
+    console.log(id);
     if (window.confirm('삭제할거니?')) {
       try {
-        await fetch(`http://localhost:3000/api/todos/${id}`, {
+        const response = await fetch(`http://localhost:3000/api/todos/${id}`, {
           method: 'DELETE',
         });
 
-        alert('삭제되었단다');
+        if (!response.ok) {
+          throw new Error('Failed to modify the todo item');
+        }
+
+        // 백엔드에서 보내준 응답을 받아서 alert
+        const result = await response.json();
+        alert(result.message);
       } catch (error) {
         console.error(error);
       }
@@ -43,18 +53,16 @@ const TodoCSRPage = () => {
   };
 
   const handleModifyComplete = async () => {
-    if (!content.trim()) {
+    if (!modifyContent.trim()) {
       alert('수정 사항이 없습니다.');
       return;
     }
-    console.log(content);
-    console.log(targetTodo?.id);
 
     // patch 서버 통신
     try {
       const response = await fetch(`http://localhost:3000/api/todos/${targetTodo?.id}`, {
         method: 'PATCH',
-        body: JSON.stringify({ contents: content }),
+        body: JSON.stringify({ contents: modifyContent }),
       });
 
       if (!response.ok) {
@@ -64,6 +72,7 @@ const TodoCSRPage = () => {
       // 백엔드에서 보내준 응답을 받아서 alert
       const result = await response.json();
       alert(result.message);
+      setModifyContent('');
     } catch (error) {
       console.log(error);
     }
@@ -71,7 +80,7 @@ const TodoCSRPage = () => {
     setIsModifying(false);
   };
   const handleModifyCancel = () => {
-    if (content.trim()) {
+    if (modifyContent.trim()) {
       if (window.confirm('수정을 취소하시겠습니까?')) {
         setIsModifying(false);
       } else {
@@ -82,7 +91,36 @@ const TodoCSRPage = () => {
   };
 
   const handleContentChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setContent(e.target.value);
+    setModifyContent(e.target.value);
+  };
+
+  const handleSubmitButton = async () => {
+    if (!title.trim()) {
+      alert('제목을 입력하세요');
+      return;
+    }
+
+    if (!content.trim()) {
+      alert('내용을 입력하세요.');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:3000/api/todos', {
+        method: 'POST',
+        body: JSON.stringify({ title, contents: content }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to add todo item ');
+      }
+
+      const result = await response.json();
+      alert(result.message);
+
+      setTitle('');
+      setContent('');
+    } catch (error) {}
   };
 
   return (
@@ -111,7 +149,7 @@ const TodoCSRPage = () => {
             <div className='flex flex-col items-center gap-2'>
               <strong className='font-bold'>수정할 내용</strong>
               <input
-                value={content}
+                value={modifyContent}
                 onChange={handleContentChange}
                 className='border border-solid border-gray-900 rounded-sm text-sm'
               />
@@ -133,8 +171,14 @@ const TodoCSRPage = () => {
           </div>
         </div>
       </div>
-      제목 : <input /> 내용: <input />
-      <button>제출</button>
+      제목 : <input value={title} onChange={(e) => setTitle(e.target.value)} />
+      내용: <input value={content} onChange={(e) => setContent(e.target.value)} />
+      <button
+        onClick={handleSubmitButton}
+        className='w-16 h-8 bg-amber-300 rounded-sm border-solid border-amber-500 border'
+      >
+        제출
+      </button>
       {todos?.map((item: Todo) => {
         return (
           <div key={item.id} className='bg-indigo-100 border border-solid border-blue-400 m-5 w-60'>
