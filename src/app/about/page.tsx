@@ -1,4 +1,4 @@
-import { companyInfo } from '@/types';
+import { CompanyInfo } from '@/types';
 import Image from 'next/image';
 import React from 'react';
 
@@ -6,7 +6,7 @@ const aboutPage = async () => {
   const response = await fetch('http://localhost:3000/api/company', {
     method: 'GET',
   });
-  const { companyInfo: companyInfo } = await response.json();
+  const companyInfo: CompanyInfo = await response.json();
 
   return (
     <div className=''>
