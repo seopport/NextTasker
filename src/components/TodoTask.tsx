@@ -1,5 +1,5 @@
 import { Todo } from '@/types';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 type PropsType = {
   todos: Todo[];
@@ -24,7 +24,7 @@ const TodoTask = ({ todos, setTargetTodo, setIsModifying, isDone }: PropsType) =
 
   const handleDelete = async (id: Todo['id']) => {
     console.log(id);
-    if (window.confirm('삭제할거니?')) {
+    if (window.confirm('삭제하시겠습니까?')) {
       try {
         const response = await fetch(`http://localhost:3000/api/todos/${id}`, {
           method: 'DELETE',
@@ -55,7 +55,7 @@ const TodoTask = ({ todos, setTargetTodo, setIsModifying, isDone }: PropsType) =
         isDone ? 'border-lime-500' : 'border-pink-500'
       } rounded-lg p-3`}
     >
-      <div className='font-bold text-lg'>{isDone ? '완료된 항목' : '미완료 항목'}</div>
+      <div className='font-bold text-xl'>{isDone ? '완료된 항목' : '미완료 항목'}</div>
       {todos
         ?.filter((item: Todo) => item.isDone === isDone)
         .map((item: Todo) => {

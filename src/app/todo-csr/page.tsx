@@ -145,7 +145,9 @@ const TodoCSRPage = () => {
           </div>
         </div>
       </div>
-      <div className='p-2 border border-solid border-gray-600 w-fit mt-6'>
+
+      {/* 할일 입력 칸 */}
+      <div className='bg-amber-100 p-2 border border-solid border-gray-600 w-fit mt-6'>
         제목 :{' '}
         <input
           className='border border-solid border-gray-600 mr-5'
@@ -165,6 +167,8 @@ const TodoCSRPage = () => {
           제출
         </button>
       </div>
+
+      {/* Task 컴포넌트 */}
       <div className='flex gap-28 mt-8'>
         <TodoTask todos={todos} setTargetTodo={setTargetTodo} setIsModifying={setIsModifying} isDone={false} />
         <TodoTask todos={todos} setTargetTodo={setTargetTodo} setIsModifying={setIsModifying} isDone={true} />
