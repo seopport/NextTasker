@@ -14,5 +14,5 @@ export async function GET(request: Request) {
     );
   }
 
-  return Response.json({ companyInfo, message: '데이터 가져오기 성공' }, { status: 201 });
+  return Response.json({ companyInfo, message: '데이터 가져오기 성공', status: 201 });
 }

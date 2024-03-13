@@ -1,12 +1,9 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import Link from 'next/link';
-import { useState } from 'react';
 import NavBar from '@/components/NavBar';
 import QueryProvider from './QueryProvider';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
+
 import { ToastContainer } from 'react-toastify';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -24,7 +21,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const router = useRouter();
   return (
     <html lang='en'>
       <QueryProvider>
