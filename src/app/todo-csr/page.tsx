@@ -1,5 +1,6 @@
 'use client';
 
+import TodoTask from '@/components/TodoTask';
 import { Todo } from '@/types';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 
@@ -23,33 +24,6 @@ const TodoCSRPage = () => {
   }, []);
 
   if (!todos) return <div>로딩중 ..</div>;
-
-  const handleDelete = async (id: Todo['id']) => {
-    console.log(id);
-    if (window.confirm('삭제할거니?')) {
-      try {
-        const response = await fetch(`http://localhost:3000/api/todos/${id}`, {
-          method: 'DELETE',
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to modify the todo item');
-        }
-
-        // 백엔드에서 보내준 응답을 받아서 alert
-        const result = await response.json();
-        alert(result.message);
-      } catch (error) {
-        console.error(error);
-      }
-    } else return;
-  };
-
-  const handleModify = (id: Todo['id']) => {
-    setIsModifying(true);
-    const targetTodo = todos.find((item) => item.id === id);
-    setTargetTodo(targetTodo);
-  };
 
   // todo 내용 수정
   const handleModifyComplete = async () => {
@@ -123,19 +97,6 @@ const TodoCSRPage = () => {
     } catch (error) {}
   };
 
-  const handleStatusToggle = async (id: Todo['id']) => {
-    const targetTodo = todos.find((item) => item.id === id);
-    setTargetTodo(targetTodo);
-    console.log(targetTodo);
-
-    try {
-      await fetch(`http://localhost:3000/api/todos/${id}`, {
-        method: 'PATCH',
-        body: JSON.stringify({ isDone: !targetTodo?.isDone }),
-      });
-    } catch (error) {}
-  };
-
   return (
     <div className='relative'>
       {/* 모달 wrap */}
@@ -184,48 +145,30 @@ const TodoCSRPage = () => {
           </div>
         </div>
       </div>
-      제목 : <input value={title} onChange={(e) => setTitle(e.target.value)} />
-      내용: <input value={content} onChange={(e) => setContent(e.target.value)} />
-      <button
-        onClick={handleSubmitButton}
-        className='w-16 h-8 bg-amber-300 rounded-sm border-solid border-amber-500 border'
-      >
-        제출
-      </button>
-      {todos?.map((item: Todo) => {
-        return (
-          <div key={item.id} className='bg-indigo-100 border border-solid border-blue-400 m-5 w-60'>
-            <div>타이틀 : {item.title}</div>
-            <div>내용 : {item.contents}</div>
-            <div>아이디 : {item.id}</div>
-            <div>상태 : {item.isDone ? '완료됨' : '미완료'}</div>
-            <button
-              className='min-w-16 h-8 bg-purple-300 rounded-sm border-solid border-purple-500 border'
-              onClick={() => {
-                handleStatusToggle(item.id);
-              }}
-            >
-              {!item.isDone ? '완료' : '되돌리기'}
-            </button>
-            <button
-              className='w-16 h-8 bg-amber-300 rounded-sm border-solid border-amber-500 border'
-              onClick={() => {
-                handleModify(item.id);
-              }}
-            >
-              수정
-            </button>
-            <button
-              className='w-16 h-8 bg-rose-300 rounded-sm border-solid border-rose-500 border'
-              onClick={() => {
-                handleDelete(item.id);
-              }}
-            >
-              삭제
-            </button>
-          </div>
-        );
-      })}
+      <div className='p-2 border border-solid border-gray-600 w-fit'>
+        제목 :{' '}
+        <input
+          className='border border-solid border-gray-600 mr-5'
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        내용:{' '}
+        <input
+          className='border border-solid border-gray-600 mr-5'
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        />
+        <button
+          onClick={handleSubmitButton}
+          className='w-16 h-8 bg-amber-300 rounded-sm border-solid border-amber-500 border'
+        >
+          제출
+        </button>
+      </div>
+      <div className='flex gap-40 ml-3'>
+        <TodoTask todos={todos} setTargetTodo={setTargetTodo} setIsModifying={setIsModifying} isDone={false} />
+        <TodoTask todos={todos} setTargetTodo={setTargetTodo} setIsModifying={setIsModifying} isDone={true} />
+      </div>
     </div>
   );
 };
