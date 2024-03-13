@@ -98,7 +98,7 @@ const TodoCSRPage = () => {
   };
 
   return (
-    <div className='relative'>
+    <div className='relative flex flex-col items-center'>
       {/* 모달 wrap */}
       <div
         className={`${
@@ -145,7 +145,7 @@ const TodoCSRPage = () => {
           </div>
         </div>
       </div>
-      <div className='p-2 border border-solid border-gray-600 w-fit'>
+      <div className='p-2 border border-solid border-gray-600 w-fit mt-6'>
         제목 :{' '}
         <input
           className='border border-solid border-gray-600 mr-5'
@@ -165,7 +165,7 @@ const TodoCSRPage = () => {
           제출
         </button>
       </div>
-      <div className='flex gap-40 ml-3'>
+      <div className='flex gap-28 mt-8'>
         <TodoTask todos={todos} setTargetTodo={setTargetTodo} setIsModifying={setIsModifying} isDone={false} />
         <TodoTask todos={todos} setTargetTodo={setTargetTodo} setIsModifying={setIsModifying} isDone={true} />
       </div>

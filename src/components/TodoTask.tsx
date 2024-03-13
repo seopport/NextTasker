@@ -50,42 +50,53 @@ const TodoTask = ({ todos, setTargetTodo, setIsModifying, isDone }: PropsType) =
   };
 
   return (
-    <div>
-      <div className='font-bold text-lg mb-3'>{isDone ? '완료된 항목' : '미완료 항목'}</div>
+    <div
+      className={`flex flex-col items-center border border-solid ${
+        isDone ? 'border-lime-500' : 'border-pink-500'
+      } rounded-lg p-3`}
+    >
+      <div className='font-bold text-lg'>{isDone ? '완료된 항목' : '미완료 항목'}</div>
       {todos
         ?.filter((item: Todo) => item.isDone === isDone)
         .map((item: Todo) => {
           console.log(item.isDone, isDone);
           return (
-            <div key={item.id} className='bg-indigo-100 border border-solid border-blue-400 w-60'>
-              <div>타이틀 : {item.title}</div>
-              <div>내용 : {item.contents}</div>
-              <div>아이디 : {item.id}</div>
-              <div>상태 : {item.isDone ? '완료됨' : '미완료'}</div>
-              <button
-                className='min-w-16 h-8 bg-purple-300 rounded-sm border-solid border-purple-500 border'
-                onClick={() => {
-                  handleStatusToggle(item.id);
-                }}
-              >
-                {!item.isDone ? '완료' : '되돌리기'}
-              </button>
-              <button
-                className='w-16 h-8 bg-amber-300 rounded-sm border-solid border-amber-500 border'
-                onClick={() => {
-                  handleModify(item.id);
-                }}
-              >
-                수정
-              </button>
-              <button
-                className='w-16 h-8 bg-rose-300 rounded-sm border-solid border-rose-500 border'
-                onClick={() => {
-                  handleDelete(item.id);
-                }}
-              >
-                삭제
-              </button>
+            <div
+              key={item.id}
+              className={`${
+                isDone ? 'bg-lime-200 border-lime-400' : 'bg-pink-200 border-pink-400'
+              } mt-4 p-3 rounded-md border-solid border
+               w-60 min-h-28`}
+            >
+              <div className='mb-2'>제목 : {item.title}</div>
+              <div className='mb-2'>내용 : {item.contents}</div>
+              {/* <div>아이디 : {item.id}</div> */}
+              <div className='flex gap-1 justify-center mt-4 text-sm '>
+                <button
+                  className='w-14 h-8 bg-amber-300 rounded-sm border-solid border-amber-600 border'
+                  onClick={() => {
+                    handleModify(item.id);
+                  }}
+                >
+                  수정
+                </button>
+                <button
+                  className='w-14 h-8 bg-rose-300 rounded-sm border-solid border-rose-500 border'
+                  onClick={() => {
+                    handleDelete(item.id);
+                  }}
+                >
+                  삭제
+                </button>
+                <button
+                  className=' min-w-14 h-8 bg-purple-300 rounded-sm border-solid border-purple-500 border'
+                  onClick={() => {
+                    handleStatusToggle(item.id);
+                  }}
+                >
+                  {!item.isDone ? '완료' : '되돌리기'}
+                </button>
+              </div>
             </div>
           );
         })}
