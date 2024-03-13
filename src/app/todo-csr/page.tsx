@@ -21,13 +21,14 @@ const TodoCSRPage = () => {
       const response = await fetch('http://localhost:3000/api/todos', {
         method: 'GET',
       });
-      const { todos } = await response.json();
+      const { todos }: { todos: Todo[] } = await response.json();
       setTodos(todos);
     };
     fetchTodos();
   }, []);
 
   if (!todos) return <div>로딩중 ..</div>;
+  //로딩스피너 추가
 
   // todo 내용 수정
   const handleModifyComplete = async () => {

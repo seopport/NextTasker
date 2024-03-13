@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 export async function GET(request: Request) {
   const response = await fetch('http://localhost:4000/todos');
-  const todos = await response.json();
+  const todos: Todo[] = await response.json();
 
   if (!todos) {
     return (
@@ -23,7 +23,7 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   // 들어온 데이터를 js 객체로 파싱
-  const { title, contents } = await request.json();
+  const { title, contents }: { title: Todo['title']; contents: Todo['contents'] } = await request.json();
 
   const response = await fetch('http://localhost:4000/todos', {
     method: 'POST',

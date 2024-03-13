@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { NextRequest } from 'next/server';
 
 export async function PATCH(request: Request, { params }: { params: { id: Todo['id'] } }) {
-  const { contents, isDone } = await request.json();
+  const { contents, isDone }: { contents: Todo['contents']; isDone: Todo['isDone'] } = await request.json();
   const { id } = params;
 
   await fetch(`http://localhost:4000/todos/${id}`, {

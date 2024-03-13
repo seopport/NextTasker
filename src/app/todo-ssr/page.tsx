@@ -7,6 +7,7 @@ import Link from 'next/link';
 const TodoSSRPage = async () => {
   const response = await fetch('http://localhost:3000/api/todos', {
     method: 'GET',
+    cache: 'no-cache',
   });
 
   const { todos } = await response.json();
