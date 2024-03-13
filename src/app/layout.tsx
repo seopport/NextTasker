@@ -6,6 +6,7 @@ import { useState } from 'react';
 import NavBar from '@/components/NavBar';
 import QueryProvider from './QueryProvider';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // const router = useRouter();
   return (
     <html lang='en'>
       <QueryProvider>
