@@ -7,6 +7,7 @@ import NavBar from '@/components/NavBar';
 import QueryProvider from './QueryProvider';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { ToastContainer } from 'react-toastify';
 
 const inter = Inter({ subsets: ['latin'] });
 

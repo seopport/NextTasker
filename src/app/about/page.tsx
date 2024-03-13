@@ -6,7 +6,7 @@ const aboutPage = async () => {
   const response = await fetch('http://localhost:3000/api/company', {
     method: 'GET',
   });
-  const companyInfo: CompanyInfo = await response.json();
+  const { companyInfo }: { companyInfo: CompanyInfo } = await response.json();
 
   return (
     <div className=''>
