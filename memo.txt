@@ -5,5 +5,5 @@
     c. U
     d. D
 
-2. Todo-SSR 페이지
-3. ISR - report 페이지
+2. Todo-SSR 페이지[완료]
+3. ISR - report 페이지[완료]
