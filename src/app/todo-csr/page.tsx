@@ -42,10 +42,31 @@ const TodoCSRPage = () => {
     setTargetTodo(targetTodo);
   };
 
-  const handleModifyComplete = () => {
+  const handleModifyComplete = async () => {
+    if (!content.trim()) {
+      alert('수정 사항이 없습니다.');
+      return;
+    }
     console.log(content);
+    console.log(targetTodo?.id);
 
     // patch 서버 통신
+    try {
+      const response = await fetch(`http://localhost:3000/api/todos/${targetTodo?.id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ contents: content }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to modify the todo item');
+      }
+
+      // 백엔드에서 보내준 응답을 받아서 alert
+      const result = await response.json();
+      alert(result.message);
+    } catch (error) {
+      console.log(error);
+    }
 
     setIsModifying(false);
   };
