@@ -6,8 +6,6 @@ export async function PATCH(request: Request, { params }: { params: { id: Todo['
   const { contents, isDone } = await request.json();
   const { id } = params;
 
-  console.log(contents, isDone);
-
   await fetch(`http://localhost:4000/todos/${id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
@@ -20,7 +18,6 @@ export async function PATCH(request: Request, { params }: { params: { id: Todo['
 //request 빼면 500 오류난다.. 왜?
 export async function DELETE(request: Request, { params }: { params: { id: Todo['id'] } }) {
   const { id } = params;
-  console.log(params);
 
   await fetch(`http://localhost:4000/todos/${id}`, {
     method: 'DELETE',

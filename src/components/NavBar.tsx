@@ -15,12 +15,11 @@ const NavBar = () => {
       <div className='flex bg-indigo-50 h-16 items-center justify-end'>
         <div className='mr-auto ml-10 text-2xl font-medium'>Meow Inc.</div>
         {navList.map((item, idx) => {
-          console.log(item.toLocaleLowerCase(), `${pathName}`);
           return (
             <Link
               key={idx}
-              className={` flex items-center justify-center w-20 h-10 rounded-lg mr-10
-              ${`/${item.toLocaleLowerCase()}` === pathName ? 'bg-purple-300' : ''}`}
+              className={` flex items-center justify-center w-20 h-10 rounded-lg mr-10 border-solid
+              ${`/${item.toLocaleLowerCase()}` === pathName ? 'bg-purple-300  border border-purple-500' : ''}`}
               href={item.toLocaleLowerCase()}
             >
               {item}

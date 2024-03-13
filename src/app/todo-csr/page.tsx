@@ -1,6 +1,6 @@
 'use client';
 
-import TodoTask from '@/components/TodoTask';
+import TodoTask from '@/components/TodoTaskCSR';
 import { Todo } from '@/types';
 import { ImStatsBars } from 'react-icons/im';
 import React, { ChangeEvent, useEffect, useState } from 'react';
@@ -152,7 +152,7 @@ const TodoCSRPage = () => {
         </div>
       </div>
       {/* 할일 입력 칸 */}
-      <div className='bg-amber-100 p-2 border border-solid border-gray-600 w-fit mt-6'>
+      <div className='bg-amber-100 p-2 rounded-sm border border-solid border-gray-500 w-fit mt-6'>
         제목 :{' '}
         <input
           className='border border-solid border-gray-600 mr-5'

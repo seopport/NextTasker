@@ -1,8 +1,6 @@
 import { companyInfo } from '@/types';
 import Image from 'next/image';
 import React from 'react';
-import companyImage from '../../assets/catTheKing.png';
-import { GET } from '../api/company/route';
 
 const aboutPage = async () => {
   const response = await fetch('http://localhost:3000/api/company', {

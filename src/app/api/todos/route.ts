@@ -25,8 +25,6 @@ export async function POST(request: Request) {
   // 들어온 데이터를 js 객체로 파싱
   const { title, contents } = await request.json();
 
-  console.log(title, contents);
-
   const response = await fetch('http://localhost:4000/todos', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

@@ -9,7 +9,7 @@ type PropsType = {
   isDone: boolean;
 };
 
-const TodoTask = ({ todos, setTargetTodo, setIsModifying, isDone }: PropsType) => {
+const TodoTaskCSR = ({ todos, setTargetTodo, setIsModifying, isDone }: PropsType) => {
   const handleStatusToggle = async (id: Todo['id']) => {
     const targetTodo = todos?.find((item) => item.id === id);
     setTargetTodo(targetTodo);
@@ -105,4 +105,4 @@ const TodoTask = ({ todos, setTargetTodo, setIsModifying, isDone }: PropsType) =
   );
 };
 
-export default TodoTask;
+export default TodoTaskCSR;

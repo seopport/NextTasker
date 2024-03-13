@@ -1,0 +1,9 @@
+해야할거
+1. 리액트 쿼리
+    a. C
+    b. R
+    c. U
+    d. D
+
+2. Todo-SSR 페이지
+3. ISR - report 페이지
