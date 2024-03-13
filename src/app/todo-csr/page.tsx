@@ -2,9 +2,13 @@
 
 import TodoTask from '@/components/TodoTask';
 import { Todo } from '@/types';
+import { ImStatsBars } from 'react-icons/im';
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const TodoCSRPage = () => {
+  const router = useRouter();
+
   const [todos, setTodos] = useState<Todo[]>();
   const [isModifying, setIsModifying] = useState(false);
   const [targetTodo, setTargetTodo] = useState<Todo>();
@@ -94,7 +98,9 @@ const TodoCSRPage = () => {
 
       setTitle('');
       setContent('');
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -145,7 +151,6 @@ const TodoCSRPage = () => {
           </div>
         </div>
       </div>
-
       {/* 할일 입력 칸 */}
       <div className='bg-amber-100 p-2 border border-solid border-gray-600 w-fit mt-6'>
         제목 :{' '}
@@ -168,6 +173,10 @@ const TodoCSRPage = () => {
         </button>
       </div>
 
+      {/* 통계 routing */}
+      <button onClick={() => router.push('/report')} className='flex mt-3'>
+        [할일 정보 통계 보러가기 <ImStatsBars className='ml-1' />]
+      </button>
       {/* Task 컴포넌트 */}
       <div className='flex gap-28 mt-8'>
         <TodoTask todos={todos} setTargetTodo={setTargetTodo} setIsModifying={setIsModifying} isDone={false} />

@@ -1,5 +1,6 @@
 import { Todo } from '@/types';
 import React from 'react';
+import { ImStatsBars } from 'react-icons/im';
 
 type PropsType = {
   todos: Todo[];
