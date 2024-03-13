@@ -1,7 +1,6 @@
 'use client';
 
 import { Todo } from '@/types';
-import { error } from 'console';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 
 const TodoCSRPage = () => {
@@ -52,6 +51,7 @@ const TodoCSRPage = () => {
     setTargetTodo(targetTodo);
   };
 
+  // todo 내용 수정
   const handleModifyComplete = async () => {
     if (!modifyContent.trim()) {
       alert('수정 사항이 없습니다.');
@@ -123,6 +123,19 @@ const TodoCSRPage = () => {
     } catch (error) {}
   };
 
+  const handleStatusToggle = async (id: Todo['id']) => {
+    const targetTodo = todos.find((item) => item.id === id);
+    setTargetTodo(targetTodo);
+    console.log(targetTodo);
+
+    try {
+      await fetch(`http://localhost:3000/api/todos/${id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ isDone: !targetTodo?.isDone }),
+      });
+    } catch (error) {}
+  };
+
   return (
     <div className='relative'>
       {/* 모달 wrap */}
@@ -187,18 +200,28 @@ const TodoCSRPage = () => {
             <div>아이디 : {item.id}</div>
             <div>상태 : {item.isDone ? '완료됨' : '미완료'}</div>
             <button
+              className='min-w-16 h-8 bg-purple-300 rounded-sm border-solid border-purple-500 border'
               onClick={() => {
-                handleDelete(item.id);
+                handleStatusToggle(item.id);
               }}
             >
-              삭제
+              {!item.isDone ? '완료' : '되돌리기'}
             </button>
             <button
+              className='w-16 h-8 bg-amber-300 rounded-sm border-solid border-amber-500 border'
               onClick={() => {
                 handleModify(item.id);
               }}
             >
               수정
+            </button>
+            <button
+              className='w-16 h-8 bg-rose-300 rounded-sm border-solid border-rose-500 border'
+              onClick={() => {
+                handleDelete(item.id);
+              }}
+            >
+              삭제
             </button>
           </div>
         );
