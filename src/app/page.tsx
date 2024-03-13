@@ -1,7 +1,17 @@
-import { companyInfo } from '@/types';
-import Image from 'next/image';
-import React from 'react';
+'use client';
 
-const page = async () => {};
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
-export default page;
+const Page = () => {
+  const router = useRouter();
+  const pathName = usePathname();
+
+  useEffect(() => {
+    if (pathName === '/') {
+      router.replace('/home');
+    }
+  }, [pathName, router]);
+};
+
+export default Page;
