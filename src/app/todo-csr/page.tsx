@@ -5,13 +5,14 @@ import { Todo } from '@/types';
 import { ImStatsBars } from 'react-icons/im';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { QueryClient, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { QueryKeys } from '@/constants/queryKeys';
-import { fetchTodos } from '@/hooks/fetchTodos';
+import { fetchTodos, modifyTodo } from '@/hooks/fetchTodos';
+import { useModifyTodoMutation } from '@/hooks/mutateTodos';
 
 const TodoCSRPage = () => {
   const router = useRouter();
-  const client = useQueryClient();
+  const queryClient = useQueryClient();
 
   // const [todos, setTodos] = useState<Todo[]>();
   const [isModifying, setIsModifying] = useState(false);
@@ -43,6 +44,15 @@ const TodoCSRPage = () => {
     queryFn: fetchTodos,
   });
 
+  const modifyMutation = useModifyTodoMutation();
+
+  // const modifyMutation = useMutation({
+  //   mutationFn: modifyTodo,
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries({ queryKey: [QueryKeys.TODOS] });
+  //   },
+  // });
+
   if (isLoading) return <div>로딩중 ..</div>;
   //로딩스피너 추가
 
@@ -57,18 +67,20 @@ const TodoCSRPage = () => {
 
     // patch 서버 통신
     try {
-      const response = await fetch(`http://localhost:3000/api/todos/${targetTodo?.id}`, {
-        method: 'PATCH',
-        body: JSON.stringify({ contents: modifyContent }),
-      });
+      // const response = await fetch(`http://localhost:3000/api/todos/${targetTodo?.id}`, {
+      //   method: 'PATCH',
+      //   body: JSON.stringify({ contents: modifyContent }),
+      // });
 
-      if (!response.ok) {
-        throw new Error('Failed to modify the todo item');
-      }
+      // if (!response.ok) {
+      //   throw new Error('Failed to modify the todo item');
+      // }
 
-      // 백엔드에서 보내준 응답을 받아서 alert
-      const result = await response.json();
-      alert(result.message);
+      // // 백엔드에서 보내준 응답을 받아서 alert
+      // const result = await response.json();
+      // alert(result.message);
+
+      modifyMutation.mutate({ modifyContent, targetTodo, isDone: targetTodo?.isDone });
       setModifyContent('');
     } catch (error) {
       console.log(error);

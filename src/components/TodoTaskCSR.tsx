@@ -6,7 +6,6 @@ const TodoTaskCSR = ({ todos, setTargetTodo, setIsModifying, isDone }: todosProp
   const handleStatusToggle = async (id: Todo['id']) => {
     const targetTodo = todos?.find((item) => item.id === id);
     setTargetTodo(targetTodo);
-    console.log(targetTodo);
 
     try {
       await fetch(`http://localhost:3000/api/todos/${id}`, {
@@ -17,7 +16,6 @@ const TodoTaskCSR = ({ todos, setTargetTodo, setIsModifying, isDone }: todosProp
   };
 
   const handleDelete = async (id: Todo['id']) => {
-    console.log(id);
     if (window.confirm('삭제하시겠습니까?')) {
       try {
         const response = await fetch(`http://localhost:3000/api/todos/${id}`, {
@@ -53,7 +51,6 @@ const TodoTaskCSR = ({ todos, setTargetTodo, setIsModifying, isDone }: todosProp
       {todos
         ?.filter((item: Todo) => item.isDone === isDone)
         .map((item: Todo) => {
-          console.log(item.isDone, isDone);
           return (
             <div
               key={item.id}
