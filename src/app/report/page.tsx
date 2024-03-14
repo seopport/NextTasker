@@ -3,14 +3,6 @@ import Link from 'next/link';
 import React from 'react';
 import { ImStatsBars } from 'react-icons/im';
 
-/*
-*- todos의 통계 정보를 ISR로 구현하는 페이지를 만듭니다.
-- 매 10초마다 결과가 갱신될 수 있도록 revalidate 옵션을 설정합니다.
-- 통계정보는 자유롭게 설정합니다.
-- 현재까지 10개의 todolist가 등록되었습니다.
-- 현재까지 4개의 완료 리스트, 6개의 할일 리스트가 존재합니다.
-*/
-
 const reportPage = async () => {
   const response = await fetch('http://localhost:3000/api/todos', {
     method: 'GET',

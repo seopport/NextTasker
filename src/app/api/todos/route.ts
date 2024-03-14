@@ -1,5 +1,4 @@
 import { Todo } from '@/types';
-import { NextApiRequest, NextApiResponse } from 'next';
 
 export async function GET(request: Request) {
   const response = await fetch('http://localhost:4000/todos');
@@ -13,8 +12,6 @@ export async function GET(request: Request) {
       }
     );
   }
-
-  console.log('여긴찍히나?');
 
   return Response.json({
     todos,

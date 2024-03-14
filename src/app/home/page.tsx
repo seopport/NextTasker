@@ -8,7 +8,6 @@ const homePage = async () => {
   });
   const { companyInfo, message, status }: { status: number; companyInfo: CompanyInfo; message: string } =
     await response.json();
-  console.log(companyInfo, message, status);
 
   return (
     <div className='min-h-screen flex flex-col justify-center items-center'>

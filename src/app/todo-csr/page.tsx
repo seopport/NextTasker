@@ -23,19 +23,6 @@ const TodoCSRPage = () => {
   const [content, setContent] = useState<Todo['contents']>('');
   const [title, setTitle] = useState<Todo['title']>('');
 
-  // useEffect(() => {
-  //   // const fetchTodos = async () => {
-  //   //   const response = await fetch('http://localhost:3000/api/todos', {
-  //   //     method: 'GET',
-  //   //   });
-  //   //   const { todos }: { todos: Todo[] } = await response.json();
-  //   //   // setTodos(todos);
-  //   // };
-  //   // fetchTodos();
-  // }, []);
-
-  // 조회
-
   // tantack query todos 배열 불러오기
   const {
     isLoading,
@@ -45,13 +32,6 @@ const TodoCSRPage = () => {
     queryKey: [QueryKeys.TODOS],
     queryFn: fetchTodos,
   });
-
-  // const modifyMutation = useMutation({
-  //   mutationFn: modifyTodo,
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries({ queryKey: [QueryKeys.TODOS] });
-  //   },
-  // });
 
   if (isLoading) return <div>로딩중 ..</div>;
   //로딩스피너 추가
@@ -67,19 +47,6 @@ const TodoCSRPage = () => {
 
     // patch 서버 통신
     try {
-      // const response = await fetch(`http://localhost:3000/api/todos/${targetTodo?.id}`, {
-      //   method: 'PATCH',
-      //   body: JSON.stringify({ contents: modifyContent }),
-      // });
-
-      // if (!response.ok) {
-      //   throw new Error('Failed to modify the todo item');
-      // }
-
-      // // 백엔드에서 보내준 응답을 받아서 alert
-      // const result = await response.json();
-      // alert(result.message);
-
       modifyMutation.mutate({ modifyContent, targetTodo, isDone: targetTodo?.isDone });
       setModifyContent('');
     } catch (error) {
@@ -115,17 +82,6 @@ const TodoCSRPage = () => {
     }
 
     try {
-      // const response = await fetch('http://localhost:3000/api/todos', {
-      //   method: 'POST',
-      //   body: JSON.stringify({ title, contents: content }),
-      // });
-
-      // if (!response.ok) {
-      //   throw new Error('Failed to add todo item ');
-      // }
-
-      // const result = await response.json();
-      // alert(result.message);
       addMutation.mutate({ title, contents: content });
       setTitle('');
       setContent('');

@@ -1,6 +1,4 @@
 import { Todo } from '@/types';
-import { NextApiRequest, NextApiResponse } from 'next';
-import { NextRequest } from 'next/server';
 
 export async function PATCH(request: Request, { params }: { params: { id: Todo['id'] } }) {
   const { contents, isDone }: { contents: Todo['contents']; isDone: Todo['isDone'] } = await request.json();

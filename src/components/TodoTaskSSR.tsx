@@ -6,7 +6,7 @@ const TodoTaskSSR = ({ todos, isDone }: { todos: Todo[] | undefined; isDone: boo
     <div
       className={`flex flex-col items-center border border-solid ${
         isDone ? 'border-lime-500' : 'border-pink-500'
-      } rounded-lg p-3`}
+      } rounded-lg p-3 min-w-64`}
     >
       <div className='font-bold text-xl'>{isDone ? '완료된 항목' : '미완료 항목'}</div>
       {todos

@@ -31,8 +31,6 @@ export const modifyTodo = async ({
   targetTodo: Todo | undefined;
   isDone: Todo['isDone'] | undefined;
 }) => {
-  console.log('modifyTodo 실행');
-
   const response = await fetch(`http://localhost:3000/api/todos/${targetTodo?.id}`, {
     method: 'PATCH',
     body: JSON.stringify({ contents: modifyContent, isDone: isDone }),

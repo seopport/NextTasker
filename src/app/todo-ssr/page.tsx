@@ -1,4 +1,3 @@
-import { Todo } from '@/types';
 import { ImStatsBars } from 'react-icons/im';
 import React from 'react';
 import TodoTaskSSR from '@/components/TodoTaskSSR';
@@ -10,8 +9,6 @@ const TodoSSRPage = async () => {
     cache: 'no-cache',
   });
   const { todos } = await response.json();
-
-  //탠스택쿼리?
 
   return (
     <div className='relative flex flex-col items-center'>

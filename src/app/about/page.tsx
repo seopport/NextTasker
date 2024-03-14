@@ -1,7 +1,6 @@
 import { CompanyInfo } from '@/types';
 import Image from 'next/image';
 import React from 'react';
-import { Bounce, toast } from 'react-toastify';
 
 const aboutPage = async () => {
   const response = await fetch('http://localhost:3000/api/company', {
@@ -9,7 +8,6 @@ const aboutPage = async () => {
   });
   const { companyInfo, message, status }: { status: number; companyInfo: CompanyInfo; message: string } =
     await response.json();
-  console.log(companyInfo, message, status);
 
   return (
     <div className=''>
