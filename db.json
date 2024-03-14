@@ -6,52 +6,16 @@
   },
   "todos": [
     {
-      "id": "1682",
-      "title": "되나",
-      "contents": "??",
+      "id": "e591",
+      "title": "태국 여행",
+      "contents": "3.15 ~ 3.19 😊",
       "isDone": false
     },
     {
-      "id": "9207",
-      "title": "안녕하세요",
-      "contents": "녀녀녀",
-      "isDone": false
-    },
-    {
-      "id": "b044",
-      "title": "dsf",
-      "contents": "sdf",
-      "isDone": false
-    },
-    {
-      "id": "e6fd",
-      "title": "ㄴㅇㄹㅇㄴ",
-      "contents": "ㄴㄹㅇㄹ",
-      "isDone": false
-    },
-    {
-      "id": "9519",
-      "title": "ㄴㅇㄹㄴㅇㄹ",
-      "contents": "ㄴㅇㄹㄴㅇ",
-      "isDone": false
-    },
-    {
-      "id": "a6fc",
-      "title": "ㅇㅇ",
-      "contents": "ㅇㅇ",
-      "isDone": false
-    },
-    {
-      "id": "5ba6",
-      "title": "ㄴㅇㄹ",
-      "contents": "ㅇㄴㄹ",
-      "isDone": false
-    },
-    {
-      "id": "8864",
-      "title": "ㅂㅂㅂ",
-      "contents": "ㅂㅂㅂ",
-      "isDone": false
+      "id": "1732",
+      "title": "Next.js 과제하기",
+      "contents": "투두리스트 만들기",
+      "isDone": true
     }
   ]
 }

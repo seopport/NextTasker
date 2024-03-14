@@ -34,7 +34,6 @@ const TodoCSRPage = () => {
   });
 
   if (isLoading) return <div>로딩중 ..</div>;
-  //로딩스피너 추가
 
   if (isError) return <div>일시적인 오류가 발생하였습니다. 잠시 후 다시 시도해주세요.</div>;
 
@@ -59,6 +58,7 @@ const TodoCSRPage = () => {
     if (modifyContent.trim()) {
       if (window.confirm('수정을 취소하시겠습니까?')) {
         setIsModifying(false);
+        setModifyContent('');
       } else {
         return;
       }
@@ -91,7 +91,7 @@ const TodoCSRPage = () => {
   };
 
   return (
-    <div className='relative flex flex-col items-center'>
+    <div className='relative flex flex-col items-center pb-8'>
       {/* 모달 wrap */}
       <div
         className={`${

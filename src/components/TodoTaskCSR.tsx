@@ -13,10 +13,6 @@ const TodoTaskCSR = ({ todos, setTargetTodo, setIsModifying, isDone }: todosProp
     setTargetTodo(targetTodo);
 
     try {
-      // await fetch(`http://localhost:3000/api/todos/${id}`, {
-      //   method: 'PATCH',
-      //   body: JSON.stringify({ isDone: !targetTodo?.isDone }),
-      // });
       modifyMutation.mutate({ modifyContent: undefined, targetTodo, isDone: !targetTodo?.isDone });
     } catch (error) {}
   };
@@ -24,18 +20,6 @@ const TodoTaskCSR = ({ todos, setTargetTodo, setIsModifying, isDone }: todosProp
   const handleDelete = async (id: Todo['id']) => {
     if (window.confirm('삭제하시겠습니까?')) {
       try {
-        // const response = await fetch(`http://localhost:3000/api/todos/${id}`, {
-        //   method: 'DELETE',
-        // });
-
-        // if (!response.ok) {
-        //   throw new Error('Failed to modify the todo item');
-        // }
-
-        // // 백엔드에서 보내준 응답을 받아서 alert
-        // const result = await response.json();
-        // alert(result.message);
-
         deleteMutation.mutate({ id });
       } catch (error) {
         console.error(error);
