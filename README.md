@@ -7,9 +7,20 @@ SSG, ISR, CSR, SSR 렌더링 방식 이해하기
 
 ### 🔽 **개발 환경**
 
-- **Environment :** VSCode, github
-- **Development :** Next.js, React, Typescript
-- **Library :** tanstack-query, tailwind, react-icons, json-server
+### _Environment_ <br />
+
+![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white) ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+
+### _Development_ <br />
+
+![Next](https://img.shields.io/badge/Next.js-8BC0D0?style=for-the-badge&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/react-ffffff?style=for-the-badge&logo=react)
+![typescript](https://img.shields.io/badge/typescript-%23323330.svg?style=for-the-badge&logo=typescript&logoColor=%#3178C6)
+
+### _Library_ <br />
+
+![TanStack Query](https://img.shields.io/badge/TanStack--Query-FECC00?style=for-the-badge&logo=react-query&logoColor=white) ![tailwind](https://img.shields.io/badge/tailwind-06B6D4?style=for-the-badge&logo=TailwindCSS&logoColor=white)
+![json-server](https://img.shields.io/badge/json-000000?style=for-the-badge&logo=json&logoColor=white)
 
 <br>
 
