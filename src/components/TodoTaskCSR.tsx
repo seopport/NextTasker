@@ -1,17 +1,21 @@
+import { useModifyTodoMutation } from '@/hooks/mutateTodos';
 import { Todo, todosPropsType } from '@/types';
 import React from 'react';
 import { ImStatsBars } from 'react-icons/im';
 
 const TodoTaskCSR = ({ todos, setTargetTodo, setIsModifying, isDone }: todosPropsType) => {
+  const modifyMutation = useModifyTodoMutation();
+
   const handleStatusToggle = async (id: Todo['id']) => {
     const targetTodo = todos?.find((item) => item.id === id);
     setTargetTodo(targetTodo);
 
     try {
-      await fetch(`http://localhost:3000/api/todos/${id}`, {
-        method: 'PATCH',
-        body: JSON.stringify({ isDone: !targetTodo?.isDone }),
-      });
+      // await fetch(`http://localhost:3000/api/todos/${id}`, {
+      //   method: 'PATCH',
+      //   body: JSON.stringify({ isDone: !targetTodo?.isDone }),
+      // });
+      modifyMutation.mutate({ modifyContent: undefined, targetTodo, isDone: !targetTodo?.isDone });
     } catch (error) {}
   };
 
@@ -45,7 +49,7 @@ const TodoTaskCSR = ({ todos, setTargetTodo, setIsModifying, isDone }: todosProp
     <div
       className={`flex flex-col items-center border border-solid ${
         isDone ? 'border-lime-500' : 'border-pink-500'
-      } rounded-lg p-3`}
+      } rounded-lg p-3 min-w-64`}
     >
       <div className='font-bold text-xl'>{isDone ? '완료된 항목' : '미완료 항목'}</div>
       {todos

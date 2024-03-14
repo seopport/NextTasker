@@ -17,10 +17,11 @@ export const modifyTodo = async ({
   targetTodo: Todo | undefined;
   isDone: Todo['isDone'] | undefined;
 }) => {
-  console.log(modifyContent, targetTodo);
+  console.log('modifyTodo 실행');
+
   const response = await fetch(`http://localhost:3000/api/todos/${targetTodo?.id}`, {
     method: 'PATCH',
-    body: JSON.stringify({ contents: modifyContent }),
+    body: JSON.stringify({ contents: modifyContent, isDone: isDone }),
   });
 
   if (!response.ok) {
@@ -29,5 +30,8 @@ export const modifyTodo = async ({
 
   // 백엔드에서 보내준 응답을 받아서 alert
   const result = await response.json();
-  alert(result.message);
+
+  if (modifyContent?.trim()) {
+    alert(`${result.message}`);
+  }
 };
