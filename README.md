@@ -1,7 +1,5 @@
 # 👽 NextTasker
 
-<br>
-
 **Next.js**를 사용한 투두리스트 프로젝트를 통해 Next의
 SSG, ISR, CSR, SSR 렌더링 방식 이해하기
 
@@ -12,6 +10,49 @@ SSG, ISR, CSR, SSR 렌더링 방식 이해하기
 - **Environment :** VSCode, github
 - **Development :** Next.js, React, Typescript
 - **Library :** tanstack-query, tailwind, react-icons, json-server
+
+<br>
+
+### 🔽 디렉토리 구조
+
+```
+src
+ ┣ app
+ ┃ ┣ about
+ ┃ ┃ ┗ page.tsx
+ ┃ ┣ api
+ ┃ ┃ ┣ company
+ ┃ ┃ ┗ todos
+ ┃ ┃ ┃ ┣ [id]
+ ┃ ┃ ┃ ┃ ┗ route.ts
+ ┃ ┃ ┃ ┗ route.ts
+ ┃ ┣ home
+ ┃ ┃ ┗ page.tsx
+ ┃ ┣ report
+ ┃ ┃ ┗ page.tsx
+ ┃ ┣ todo-csr
+ ┃ ┃ ┗ page.tsx
+ ┃ ┣ todo-ssr
+ ┃ ┃ ┗ page.tsx
+ ┃ ┣ favicon.ico
+ ┃ ┣ globals.css
+ ┃ ┣ layout.tsx
+ ┃ ┗ page.tsx
+ ┣ assets
+ ┃ ┗ catTheKing.png
+ ┣ components
+ ┃ ┣ NavBar.tsx
+ ┃ ┣ TodoTaskCSR.tsx
+ ┃ ┗ TodoTaskSSR.tsx
+ ┣ constants
+ ┃ ┗ queryKeys.ts
+ ┣ hooks
+ ┃ ┣ fetchTodos.ts
+ ┃ ┣ mutateTodos.ts
+ ┃ ┗ QueryProvider.tsx
+ ┗ types
+ ┃ ┗ index.ts
+```
 
 <br>
 
