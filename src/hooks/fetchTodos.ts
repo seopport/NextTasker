@@ -8,6 +8,20 @@ export const fetchTodos = async () => {
   return todos;
 };
 
+export const addTodo = async ({ title, contents }: { title: Todo['title']; contents: Todo['contents'] }) => {
+  const response = await fetch('http://localhost:3000/api/todos', {
+    method: 'POST',
+    body: JSON.stringify({ title, contents }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to add todo item ');
+  }
+
+  const result = await response.json();
+  alert(result.message);
+};
+
 export const modifyTodo = async ({
   modifyContent,
   targetTodo,

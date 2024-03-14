@@ -1,7 +1,7 @@
 // hooks/useModifyTodoMutation.ts
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteTodo, modifyTodo } from './fetchTodos';
+import { addTodo, deleteTodo, modifyTodo } from './fetchTodos';
 import { QueryKeys } from '@/constants/queryKeys';
 
 export const useModifyTodoMutation = () => {
@@ -32,4 +32,19 @@ export const useDeleteTodoMutation = () => {
   });
 
   return deleteMutation;
+};
+
+export const useAddTodoMutation = () => {
+  const queryClient = useQueryClient();
+
+  const addMutation = useMutation({
+    mutationFn: addTodo,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QueryKeys.TODOS],
+      });
+    },
+  });
+
+  return addMutation;
 };

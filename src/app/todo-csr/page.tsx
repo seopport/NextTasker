@@ -8,11 +8,13 @@ import { useRouter } from 'next/navigation';
 import { QueryClient, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { QueryKeys } from '@/constants/queryKeys';
 import { fetchTodos, modifyTodo } from '@/hooks/fetchTodos';
-import { useModifyTodoMutation } from '@/hooks/mutateTodos';
+import { useAddTodoMutation, useModifyTodoMutation } from '@/hooks/mutateTodos';
 
 const TodoCSRPage = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
+  const addMutation = useAddTodoMutation();
+  const modifyMutation = useModifyTodoMutation();
 
   // const [todos, setTodos] = useState<Todo[]>();
   const [isModifying, setIsModifying] = useState(false);
@@ -43,8 +45,6 @@ const TodoCSRPage = () => {
     queryKey: [QueryKeys.TODOS],
     queryFn: fetchTodos,
   });
-
-  const modifyMutation = useModifyTodoMutation();
 
   // const modifyMutation = useMutation({
   //   mutationFn: modifyTodo,
@@ -115,18 +115,18 @@ const TodoCSRPage = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/api/todos', {
-        method: 'POST',
-        body: JSON.stringify({ title, contents: content }),
-      });
+      // const response = await fetch('http://localhost:3000/api/todos', {
+      //   method: 'POST',
+      //   body: JSON.stringify({ title, contents: content }),
+      // });
 
-      if (!response.ok) {
-        throw new Error('Failed to add todo item ');
-      }
+      // if (!response.ok) {
+      //   throw new Error('Failed to add todo item ');
+      // }
 
-      const result = await response.json();
-      alert(result.message);
-
+      // const result = await response.json();
+      // alert(result.message);
+      addMutation.mutate({ title, contents: content });
       setTitle('');
       setContent('');
     } catch (error) {
