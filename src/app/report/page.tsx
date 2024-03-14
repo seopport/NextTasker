@@ -32,13 +32,13 @@ const reportPage = async () => {
         className='bg-amber-100 border-amber-400 mt-4 p-3 rounded-md border-solid border
         w-1/3 min-h-16 flex items-center justify-center'
       >
-        <div>미완료 된 항목은 {InProgressTodos?.length}개 입니다.</div>
+        <div>미완료된 항목은 {InProgressTodos?.length}개 입니다.</div>
       </div>
       <div
         className='bg-lime-100 border-lime-400 mt-4 p-3 rounded-md border-solid border
         w-1/3 min-h-16 flex items-center justify-center'
       >
-        <div>완료 된 항목은 {completedTodos?.length}개 입니다.</div>
+        <div>완료된 항목은 {completedTodos?.length}개 입니다.</div>
       </div>
       <Link href='/todo-csr' className='mt-5 decoration-solid underline'>
         할일 추가하러 가기 (*ᴗ͈ˬᴗ͈)ꕤ*.ﾟ
