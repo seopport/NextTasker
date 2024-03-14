@@ -9,8 +9,9 @@ const TodoSSRPage = async () => {
     method: 'GET',
     cache: 'no-cache',
   });
-
   const { todos } = await response.json();
+
+  //탠스택쿼리?
 
   return (
     <div className='relative flex flex-col items-center'>

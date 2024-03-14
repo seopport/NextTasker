@@ -1,7 +1,7 @@
 import { Todo } from '@/types';
 import React from 'react';
 
-const TodoTaskSSR = ({ todos, isDone }: { todos: Todo[]; isDone: boolean }) => {
+const TodoTaskSSR = ({ todos, isDone }: { todos: Todo[] | undefined; isDone: boolean }) => {
   return (
     <div
       className={`flex flex-col items-center border border-solid ${
