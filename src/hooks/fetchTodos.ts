@@ -35,3 +35,17 @@ export const modifyTodo = async ({
     alert(`${result.message}`);
   }
 };
+
+export const deleteTodo = async ({ id }: { id: Todo['id'] }) => {
+  const response = await fetch(`http://localhost:3000/api/todos/${id}`, {
+    method: 'DELETE',
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to modify the todo item');
+  }
+
+  // 백엔드에서 보내준 응답을 받아서 alert
+  const result = await response.json();
+  alert(result.message);
+};

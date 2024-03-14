@@ -6,22 +6,16 @@
   },
   "todos": [
     {
-      "id": "43d3",
-      "title": "dsfdsf",
-      "contents": "ㄴㄷ",
-      "isDone": true
-    },
-    {
       "id": "6041",
       "title": "헷..",
       "contents": "음..",
-      "isDone": false
+      "isDone": true
     },
     {
-      "id": "3a85",
-      "title": "자러간다..",
-      "contents": "sdf",
-      "isDone": true
+      "id": "b27c",
+      "title": "ㄴㅇㄹ",
+      "contents": "ㄴㅇㄹ",
+      "isDone": false
     }
   ]
 }

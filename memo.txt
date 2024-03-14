@@ -7,3 +7,10 @@
 
 2. Todo-SSR 페이지[완료]
 3. ISR - report 페이지[완료]
+
+탠스택 쿼리 순서
+1. queryProvider 생성
+1. 백엔드 api 준비
+2. 클라이언트에서 fetch하는 함수 생성(여기서 값 전달하면 백엔드 api로 전달)
+3. mutate 커스텀 훅 생성
+4. 컴포넌트에서 mutate import하여 사용
