@@ -4,17 +4,18 @@ import React from 'react';
 import { ImStatsBars } from 'react-icons/im';
 
 const reportPage = async () => {
-  const response = await fetch('http://localhost:3000/api/todos', {
+  const response = await fetch('http://localhost:4000/todos', {
     method: 'GET',
     next: {
       revalidate: 10,
     },
   });
 
-  const { todos } = await response.json();
+  const todos: Todo[] = await response.json();
+  console.log(todos);
 
-  const completedTodos: Todo[] = todos.filter((item: Todo) => item.isDone === true);
-  const InProgressTodos: Todo[] = todos.filter((item: Todo) => item.isDone === false);
+  const completedTodos: Todo[] = todos?.filter((item: Todo) => item.isDone === true);
+  const InProgressTodos: Todo[] = todos?.filter((item: Todo) => item.isDone === false);
 
   return (
     <div className='flex flex-col items-center'>
@@ -25,19 +26,19 @@ const reportPage = async () => {
         className='bg-rose-100 border-rose-400 mt-4 p-3 rounded-md border-solid border
         w-1/3 min-h-16 flex items-center justify-center'
       >
-        <div>현재까지 총 {todos.length}개의 할일이 등록되었습니다.</div>
+        <div>현재까지 총 {todos?.length}개의 할일이 등록되었습니다.</div>
       </div>
       <div
         className='bg-amber-100 border-amber-400 mt-4 p-3 rounded-md border-solid border
         w-1/3 min-h-16 flex items-center justify-center'
       >
-        <div>미완료 된 항목은 {InProgressTodos.length}개 입니다.</div>
+        <div>미완료 된 항목은 {InProgressTodos?.length}개 입니다.</div>
       </div>
       <div
         className='bg-lime-100 border-lime-400 mt-4 p-3 rounded-md border-solid border
         w-1/3 min-h-16 flex items-center justify-center'
       >
-        <div>완료 된 항목은 {completedTodos.length}개 입니다.</div>
+        <div>완료 된 항목은 {completedTodos?.length}개 입니다.</div>
       </div>
       <Link href='/todo-csr' className='mt-5 decoration-solid underline'>
         할일 추가하러 가기 (*ᴗ͈ˬᴗ͈)ꕤ*.ﾟ

@@ -3,11 +3,13 @@ import Image from 'next/image';
 import React from 'react';
 
 const aboutPage = async () => {
-  const response = await fetch('http://localhost:3000/api/company', {
+  const response = await fetch('http://localhost:4000/companyInfo', {
     method: 'GET',
   });
-  const { companyInfo, message, status }: { status: number; companyInfo: CompanyInfo; message: string } =
-    await response.json();
+  // const { companyInfo, message, status }: { status: number; companyInfo: CompanyInfo; message: string } =
+  //   await response.json();
+
+  const companyInfo: CompanyInfo = await response.json();
 
   return (
     <div className=''>

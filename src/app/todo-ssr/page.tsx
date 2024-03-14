@@ -2,13 +2,14 @@ import { ImStatsBars } from 'react-icons/im';
 import React from 'react';
 import TodoTaskSSR from '@/components/TodoTaskSSR';
 import Link from 'next/link';
+import { Todo } from '@/types';
 
 const TodoSSRPage = async () => {
-  const response = await fetch('http://localhost:3000/api/todos', {
+  const response = await fetch('http://localhost:4000/todos', {
     method: 'GET',
-    cache: 'no-cache',
+    cache: 'no-store',
   });
-  const { todos } = await response.json();
+  const todos: Todo[] = await response.json();
 
   return (
     <div className='relative flex flex-col items-center'>
