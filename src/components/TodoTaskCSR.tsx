@@ -1,15 +1,8 @@
-import { Todo } from '@/types';
+import { Todo, todosPropsType } from '@/types';
 import React from 'react';
 import { ImStatsBars } from 'react-icons/im';
 
-type PropsType = {
-  todos: Todo[];
-  setTargetTodo: React.Dispatch<React.SetStateAction<Todo | undefined>>;
-  setIsModifying: React.Dispatch<React.SetStateAction<boolean>>;
-  isDone: boolean;
-};
-
-const TodoTaskCSR = ({ todos, setTargetTodo, setIsModifying, isDone }: PropsType) => {
+const TodoTaskCSR = ({ todos, setTargetTodo, setIsModifying, isDone }: todosPropsType) => {
   const handleStatusToggle = async (id: Todo['id']) => {
     const targetTodo = todos?.find((item) => item.id === id);
     setTargetTodo(targetTodo);

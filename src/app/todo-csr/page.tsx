@@ -5,30 +5,48 @@ import { Todo } from '@/types';
 import { ImStatsBars } from 'react-icons/im';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { QueryKeys } from '@/constants/queryKeys';
+import { fetchTodos } from '@/hooks/fetchTodos';
 
 const TodoCSRPage = () => {
   const router = useRouter();
+  const client = useQueryClient();
 
-  const [todos, setTodos] = useState<Todo[]>();
+  // const [todos, setTodos] = useState<Todo[]>();
   const [isModifying, setIsModifying] = useState(false);
   const [targetTodo, setTargetTodo] = useState<Todo>();
   const [modifyContent, setModifyContent] = useState<Todo['contents']>('');
   const [content, setContent] = useState<Todo['contents']>('');
   const [title, setTitle] = useState<Todo['title']>('');
 
-  useEffect(() => {
-    const fetchTodos = async () => {
-      const response = await fetch('http://localhost:3000/api/todos', {
-        method: 'GET',
-      });
-      const { todos }: { todos: Todo[] } = await response.json();
-      setTodos(todos);
-    };
-    fetchTodos();
-  }, []);
+  // useEffect(() => {
+  //   // const fetchTodos = async () => {
+  //   //   const response = await fetch('http://localhost:3000/api/todos', {
+  //   //     method: 'GET',
+  //   //   });
+  //   //   const { todos }: { todos: Todo[] } = await response.json();
+  //   //   // setTodos(todos);
+  //   // };
+  //   // fetchTodos();
+  // }, []);
 
-  if (!todos) return <div>로딩중 ..</div>;
+  // 조회
+
+  // tantack query todos 배열 불러오기
+  const {
+    isLoading,
+    isError,
+    data: todos,
+  } = useQuery({
+    queryKey: [QueryKeys.TODOS],
+    queryFn: fetchTodos,
+  });
+
+  if (isLoading) return <div>로딩중 ..</div>;
   //로딩스피너 추가
+
+  if (isError) return <div>일시적인 오류가 발생하였습니다. 잠시 후 다시 시도해주세요.</div>;
 
   // todo 내용 수정
   const handleModifyComplete = async () => {
